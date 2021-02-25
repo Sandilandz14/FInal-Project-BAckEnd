@@ -12,10 +12,10 @@ def init_sqlite_db():
     print("database has opened")
 
     conn.execute("CREATE TABLE IF NOT EXISTS users(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, addr TEXT, password TEXT)")
-    print("Table was created")
+    print("Users table was created")
 
-    # conn.execute("CREATE TABLE IF NOT EXISTS products(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, addr TEXT, password TEXT)")
-    # print("Table was created")
+    # conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ratings TEXT, description TEXT, image BLOB)")
+    # print("Products was created")
 
     conn.close()
 
