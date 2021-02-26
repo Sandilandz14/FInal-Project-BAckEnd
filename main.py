@@ -11,31 +11,25 @@ def init_sqlite_db():
     conn = sqlite3.connect('mydata.db')
     print("database has opened")
 
-    conn.execute("CREATE TABLE IF NOT EXISTS users(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, addr TEXT, password TEXT)")
+    conn.execute("CREATE TABLE IF NOT EXISTS users(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ema il TEXT, addr TEXT, password TEXT)")
     print("Users table was created")
 
-    # conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ratings TEXT, description TEXT, image BLOB)")
-    # print("Products was created")
+    conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image BLOB)")
+    print("Products was created")
 
     conn.close()
 
 init_sqlite_db()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/sign-up/')
-def add_user():
-    return render_template('signup.html')
 
 @app.route('/add-data/', methods=['POST'])
 def add_new_record():
     try:
-        name = request.form['fname']
-        email = request.form['email']
-        addr = request.form['addr']
-        password = request.form['password']
+        post_data = request.get_json()
+        name = post_data['fname']
+        email = post_data['email']
+        addr = post_data['addr']
+        password = post_data['password']
 
         with sqlite3.connect('mydata.db') as con:
             cur = con.cursor()
@@ -63,6 +57,15 @@ def list_users():
     except Exception as e:
         print("Something happened when getting data from db:"+str(e))
     return jsonify(rows)
+
+# @app.route('/products/')
+# def insert_products():
+#
+#
+#
+#     conn.close()
+#
+# insert_products()
 
 if __name__=='__main__':
     app.run(debug=True)
