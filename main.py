@@ -20,8 +20,8 @@ def init_sqlite_db():
     conn.execute("CREATE TABLE IF NOT EXISTS users(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, addr TEXT, password TEXT)")
     print("Users table was created")
 
-    # conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT)")
-    # print("Products was created")
+    conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT)")
+    print("Products was created")
 
 
 
@@ -51,7 +51,7 @@ def add_new_record():
             msg = name + " successfully added to the table."
     except Exception as e:
         con.rollback()
-        msg = "Error occured insert operation " + str(e)
+        msg = "Error occured in insert operation " + str(e)
     finally:
         con.close()
         return {'msg': msg}
@@ -71,29 +71,29 @@ def list_users():
         print("Something happened when getting data from db:"+str(e))
     return jsonify(rows)
 
-# @app.route('/products/')
-# def insert_products():
-#     try:
-#         with sqlite3.connect('mydata.db') as con:
-#             con.row_factory = dict_factory
-#             cur = con.cursor()
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES()")
-#             con.commit()
-#             msg= 'Record successfully added.'
-#     except Exception as e:
-#         con.rollback()
-#         msg = 'Error occurred in insert operation'+str(e)
-#     finally:
-#     con.close()
-#     return jsonify(msg)
+@app.route('/products/')
+def insert_products():
+    try:
+        with sqlite3.connect('mydata.db') as con:
+            con.row_factory = dict_factory
+            cur = con.cursor()
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES() 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg")
+            cur.execute("INSERT INTO products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT) VALUES( 1, almonds, 4/5, Well made almonds. Good for the soul., R200, https://i.postimg.cc/nrTDk302/almonds.jpg)")
+            con.commit()
+            msg= 'Record successfully added.'
+    except Exception as e:
+        con.rollback()
+        msg = 'Error occurred in insert operation'+str(e)
+    finally:
+    con.close()
+    return jsonify(msg)
 
 
 if __name__=='__main__':
