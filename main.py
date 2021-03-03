@@ -66,8 +66,7 @@ def list_users():
             con.row_factory = dict_factory
             con = sqlite3.connect('mydata.db')
             cur = con.cursor()
-            cur.execute("select * from users")
-
+            cur.execute("SELECT * FROM users")
             rows = cur.fetchall()
 
     except Exception as e:
