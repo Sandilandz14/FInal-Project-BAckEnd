@@ -64,7 +64,7 @@ def list_users():
     try:
         with sqlite3.connect('mydata.db') as con:
             con.row_factory = dict_factory
-            con = sqlite3.connect('mydata.db')
+            # con = sqlite3.connect('mydata.db')
             cur = con.cursor()
             cur.execute("SELECT * FROM users")
             rows = cur.fetchall()
@@ -74,7 +74,7 @@ def list_users():
     return jsonify(rows)
 
 
-@app.route('/products/')
+@app.route('/products/', methods = ['POST'])
 def insert_products():
     try:
         with sqlite3.connect('mydata.db') as con:
